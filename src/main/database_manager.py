@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class DatabaseManager:
     def __init__(self, db_name):
         self.db_name = db_name
@@ -50,3 +51,14 @@ class DatabaseManager:
     def close(self):
         if self.conn:
             self.conn.close()
+
+    def getCrashByState(self, state_name):
+        self.cursor.execute('''
+        SELECT * FROM crashes WHERE state_name = ?''', (state_name,))
+        result = self.cursor.fetchall()
+        return result
+
+
+
+
+
